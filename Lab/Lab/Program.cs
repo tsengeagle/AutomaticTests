@@ -133,8 +133,45 @@ namespace Lab
             //assert
             expected.ToExpectedObject().ShouldMatch(actual);
         }
+
+        [TestMethod]
+        public void CollectionObject_UseCollectionAssert_CompareTwoCollection()
+        {
+            //arrange
+            var expected = new List<int>() { 1, 2, 3, 4, 5 };
+
+            //act
+            var actual = new List<int>() { 1, 2, 3, 4, 5 };
+
+            //assert
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void CollectionObject_UseCollectionAssert_PartialCompare()
+        {
+            //arrange
+            var superSet = new List<int>() { 1, 2, 3, 4, 5 };
+
+            //act
+            var subSet = new List<int>() { 1, 2, 5 };
+
+            //assert
+            CollectionAssert.IsSubsetOf(subSet, superSet);
+        }
+
+        [TestMethod]
+        public void CollectionObject_UseExpectedObject()
+        {
+            //arrange
+            var expected = new List<int>() { 1, 2, 3 };
+            //act
+            var actual = new List<int>() { 1, 2, 3 };
+            //assert
+            expected.ToExpectedObject();
+        }
     }
-    
+
     public class MyType
     {
         public int Value { get; set; }
