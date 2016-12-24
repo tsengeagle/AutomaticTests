@@ -17,6 +17,11 @@ namespace Lab
         {
             return "Hello " + myName;
         }
+
+        internal int AplusB(int a, int b)
+        {
+            return a + b;
+        }
     }
 
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
@@ -27,13 +32,29 @@ namespace Lab
         {
             //arrange
             var myName = "tseng";
-            var target=new Program();
-            
+            var target = new Program();
+            var expected = "Hello tseng";
             //act
-            var actual=target.SayHello(myName);
-            
+            var actual = target.SayHello(myName);
+
             //assert
-            Assert.AreEqual("Hello tseng",actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Add_InputTwoNumber_ShouldGetSummary()
+        {
+            //arrange
+            var a = 1;
+            var b = 2;
+            var expected = 3;
+            var target = new Program();
+
+            //act
+            var actual = target.AplusB(a, b);
+
+            //assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }
