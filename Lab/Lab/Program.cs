@@ -22,6 +22,15 @@ namespace Lab
         {
             return a + b;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Program)
+            {
+                return true;
+            }
+            return base.Equals(obj);
+        }
     }
 
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
@@ -67,7 +76,7 @@ namespace Lab
             var actual=new Program();
 
             //assert
-            Assert.AreNotEqual(expected,actual);
+            Assert.AreEqual(expected,actual);
 
         }
     }
