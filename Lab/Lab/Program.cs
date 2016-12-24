@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExpectedObjects;
 
 namespace Lab
 {
@@ -92,8 +93,48 @@ namespace Lab
             //assert
             Assert.AreEqual(expected, actual);
         }
-    }
 
+        [TestMethod]
+        public void ComplexObject_UseExpectedObject_ToCompareEachProperties()
+        {
+            //arrange
+            var expected = new AdmCSRACodeTbl()
+            {
+                chSecNo = "00",
+                chACode = "12345",
+                chACodeName = "Test Name",
+                chValidDay = 3,
+                UsageLogs = new PositionLogs() { DateTime = new DateTime(2016, 1, 1), Location = "1050101-0001" }
+            };
+
+            //act
+            var actual = new AdmCSRACodeTbl()
+            {
+                chSecNo = "00",
+                chACode = "12345",
+                chACodeName = "Test Name",
+                chValidDay = 3,
+                UsageLogs = new PositionLogs() { DateTime = new DateTime(2016, 1, 1), Location = "1050101-0001" }
+            };
+
+            //assert
+            expected.ToExpectedObject().ShouldEqual(actual);
+        }
+
+        [TestMethod]
+        public void ComplexObject_UseExpectedObject_PartialCompare()
+        {
+            //arrange
+            var expected = new { chSecNo = "", chACode = "AAA" };
+
+            //act
+            var actual = new AdmCSRACodeTbl() { chSecNo = "", chACode = "AAA", chACodeName = "MyName" };
+
+            //assert
+            expected.ToExpectedObject().ShouldMatch(actual);
+        }
+    }
+    
     public class MyType
     {
         public int Value { get; set; }
@@ -110,5 +151,20 @@ namespace Lab
             }
             return base.Equals(obj);
         }
+    }
+
+    public class AdmCSRACodeTbl
+    {
+        public string chSecNo { get; set; }
+        public string chACode { get; set; }
+        public string chACodeName { get; set; }
+        public Nullable<short> chValidDay { get; set; }
+        public PositionLogs UsageLogs { get; set; }
+    }
+
+    public class PositionLogs
+    {
+        public DateTime DateTime { get; set; }
+        public string Location { get; set; }
     }
 }
