@@ -56,5 +56,19 @@ namespace Lab
             //assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void ObjectCompare_CreateAnObject_ButWillNeverEqual()
+        {
+            //arrange
+            var expected=new Program();
+
+            //act
+            var actual=new Program();
+
+            //assert
+            Assert.AreNotEqual(expected,actual);
+
+        }
     }
 }
