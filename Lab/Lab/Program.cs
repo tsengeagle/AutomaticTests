@@ -70,14 +70,45 @@ namespace Lab
         public void ObjectCompare_CreateAnObject_ButWillNeverEqual()
         {
             //arrange
-            var expected=new Program();
+            var expected = new Program();
 
             //act
-            var actual=new Program();
+            var actual = new Program();
 
             //assert
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
 
+        }
+
+        [TestMethod]
+        public void ComplexObject_NeedsToCompareEachProperties()
+        {
+            //arrange
+            var expected = new MyType() { Name = "MyName", Value = 10 };
+
+            //act
+            var actual = new MyType() { Name = "MyName", Value = 10 };
+
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+    }
+
+    public class MyType
+    {
+        public int Value { get; set; }
+        public string Name { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is MyType)
+            {
+                if (((MyType)obj).Name == Name && ((MyType)obj).Value == Value)
+                {
+                    return true;
+                }
+            }
+            return base.Equals(obj);
         }
     }
 }
