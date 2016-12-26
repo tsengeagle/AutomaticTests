@@ -24,14 +24,14 @@ namespace Lab
             return a + b;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj is Program)
-            {
-                return true;
-            }
-            return base.Equals(obj);
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj is Program)
+        //    {
+        //        return true;
+        //    }
+        //    return base.Equals(obj);
+        //}
     }
 
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
@@ -41,43 +41,32 @@ namespace Lab
         public void SayHello_InputMyName_ShouldSayHelloToMe()
         {
             //arrange
-            var myName = "tseng";
-            var target = new Program();
-            var expected = "Hello tseng";
-            //act
-            var actual = target.SayHello(myName);
 
+            //act
+            
             //assert
-            Assert.AreEqual(expected, actual);
+            
         }
 
         [TestMethod]
         public void Add_InputTwoNumber_ShouldGetSummary()
         {
             //arrange
-            var a = 1;
-            var b = 2;
-            var expected = 3;
-            var target = new Program();
-
+            
             //act
-            var actual = target.AplusB(a, b);
-
+            
             //assert
-            Assert.AreEqual(expected, actual);
+            
         }
 
         [TestMethod]
         public void ObjectCompare_CreateAnObject_ButWillNeverEqual()
         {
             //arrange
-            var expected = new Program();
 
             //act
-            var actual = new Program();
 
             //assert
-            Assert.AreEqual(expected, actual);
 
         }
 
@@ -85,90 +74,65 @@ namespace Lab
         public void ComplexObject_NeedsToCompareEachProperties()
         {
             //arrange
-            var expected = new MyType() { Name = "MyName", Value = 10 };
 
             //act
-            var actual = new MyType() { Name = "MyName", Value = 10 };
 
             //assert
-            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void ComplexObject_UseExpectedObject_ToCompareEachProperties()
         {
             //arrange
-            var expected = new AdmCSRACodeTbl()
-            {
-                chSecNo = "00",
-                chACode = "12345",
-                chACodeName = "Test Name",
-                chValidDay = 3,
-                UsageLogs = new PositionLogs() { DateTime = new DateTime(2016, 1, 1), Location = "1050101-0001" }
-            };
 
             //act
-            var actual = new AdmCSRACodeTbl()
-            {
-                chSecNo = "00",
-                chACode = "12345",
-                chACodeName = "Test Name",
-                chValidDay = 3,
-                UsageLogs = new PositionLogs() { DateTime = new DateTime(2016, 1, 1), Location = "1050101-0001" }
-            };
 
             //assert
-            expected.ToExpectedObject().ShouldEqual(actual);
+
         }
 
         [TestMethod]
         public void ComplexObject_UseExpectedObject_PartialCompare()
         {
             //arrange
-            var expected = new { chSecNo = "", chACode = "AAA" };
 
             //act
-            var actual = new AdmCSRACodeTbl() { chSecNo = "", chACode = "AAA", chACodeName = "MyName" };
 
             //assert
-            expected.ToExpectedObject().ShouldMatch(actual);
+
         }
 
         [TestMethod]
         public void CollectionObject_UseCollectionAssert_CompareTwoCollection()
         {
             //arrange
-            var expected = new List<int>() { 1, 2, 3, 4, 5 };
 
             //act
-            var actual = new List<int>() { 1, 2, 3, 4, 5 };
 
             //assert
-            CollectionAssert.AreEqual(expected, actual);
+
         }
 
         [TestMethod]
         public void CollectionObject_UseCollectionAssert_PartialCompare()
         {
             //arrange
-            var superSet = new List<int>() { 1, 2, 3, 4, 5 };
 
             //act
-            var subSet = new List<int>() { 1, 2, 5 };
 
             //assert
-            CollectionAssert.IsSubsetOf(subSet, superSet);
+
         }
 
         [TestMethod]
         public void CollectionObject_UseExpectedObject()
         {
             //arrange
-            var expected = new List<int>() { 1, 2, 3 };
+            
             //act
-            var actual = new List<int>() { 1, 2, 3 };
+        
             //assert
-            expected.ToExpectedObject();
+
         }
     }
 
@@ -176,18 +140,6 @@ namespace Lab
     {
         public int Value { get; set; }
         public string Name { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is MyType)
-            {
-                if (((MyType)obj).Name == Name && ((MyType)obj).Value == Value)
-                {
-                    return true;
-                }
-            }
-            return base.Equals(obj);
-        }
     }
 
     public class AdmCSRACodeTbl
