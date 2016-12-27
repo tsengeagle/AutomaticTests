@@ -4,8 +4,11 @@ namespace Lab
 {
     public class StubAndMock
     {
+        //2.依賴注入，由呼叫端決定依賴實作
+
         internal void DoSomething()
         {
+            //1.抽離依賴
             var logger = new MyLog();
             logger.WriteMessage("執行到此");
         }
@@ -26,6 +29,13 @@ namespace Lab
             //assert??? <----如何確認DoSomething這個method真的有寫log?
             
         }
+
+        //4.測試案例中注入偽造的依賴類別
+        [TestMethod]
+        public void SUT_Behavior_HandMadeFakeObject()
+        {
+
+        }
     }
 
     public class MyLog
@@ -35,4 +45,6 @@ namespace Lab
             Console.WriteLine(message);
         }
     }
+
+    //3.偽造依賴類別
 }
